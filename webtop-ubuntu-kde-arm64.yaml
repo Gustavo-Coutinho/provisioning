@@ -1,0 +1,26 @@
+version: "2.1"
+services:
+  webtop:
+    image: lscr.io/linuxserver/webtop:arm64v8-ubuntu-kde
+    container_name: webtop
+    privileged: true
+    security_opt:
+      - seccomp:unconfined #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo
+      - SUBFOLDER=/ #optional
+      - TITLE=Webtop #optional
+      - CUSTOM_USER=gupoco
+      - PASSWORD=PXgcb3PA87msqvjbAFEGUapxXnboo866HyiF8bXUgXmpELGQ6BtnXXE5peVkhMJ9HRe3D396p2YERU3xiZc3bqrZr4wUoMMSAdX2rJJzdJbX9Gez6CKAmhzFxKDYLexm
+    volumes:
+      - /home/ubuntu/webtop:/config
+      - /var/run/docker.sock:/var/run/docker.sock #optional
+    ports:
+      - 3000:3000
+      - 3001:3001
+    devices:
+      - /dev/dri:/dev/dri #optional
+    shm_size: "6gb" #optional
+    restart: unless-stopped
