@@ -1,0 +1,6 @@
+version: '1.0.0'
+
+# uso: X.Y.Z
+# Z = patch de correção de bugs. alterações que corrigem erros, mas não adicionam novas funcionalidades e não quebram nenhuma funcionalidade existente
+# Y = lançamento menor (minor release). Adicionou funcionalidades que não quebram a compatibilidade com versões anteriores
+# X = lançamento maior (major release). Alterações que quebram a compatibilidade com versões anteriores
