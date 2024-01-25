@@ -1,0 +1,25 @@
+version: "2.1"
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo
+      - PASSWORD=PXgcb3PA87msqvjbAFEGUapxXnboo866HyiF8bXUgXmpELGQ6BtnXXE5peVkhMJ9HRe3D396p2YERU3xiZc3bqrZr4wUoMMSAdX2rJJzdJbX9Gez6CKAmhzFxKDYLexm
+      # PASSWORD HASH APENAS VERIFICA SE O HASH CORRESPONDE. ELE SUBSTITUI O PASSWORD COMUM.
+      # NÃO ESTÁ FUNCIONANDO EM 2024-01-05
+      #- HASHED_PASSWORD= \
+      #    - $argon2i$v=19$m=4096,t=3,p=1$+aVtm6KeYlRVOGwK3csgDw$7vIExMjRi5HF7uyiaqiJBn93/1ZvermdoMsGEDKrUqw
+      - SUDO_PASSWORD=
+      #- SUDO_PASSWORD_HASH= #optional
+      #- PROXY_DOMAIN=code-server.my.domain #optional
+      - DEFAULT_WORKSPACE=/config/workspace #optional
+    volumes:
+      - /home/ubuntu/vsconfig:/config
+      - /home/ubuntu/vs:/config/workspace
+    ports:
+      - 8443:8443
+    restart: unless-stopped
+# https://hub.docker.com/r/linuxserver/code-server
