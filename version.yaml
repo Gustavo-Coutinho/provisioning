@@ -1,4 +1,4 @@
-version: '1.0.0'
+version: '1.1.0'
 
 # uso: X.Y.Z
 # Z = patch de correção de bugs. alterações que corrigem erros, mas não adicionam novas funcionalidades e não quebram nenhuma funcionalidade existente
