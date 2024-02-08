@@ -1,0 +1,33 @@
+# ANTES DO docker compose up, executar:
+# mkdir /home/ubuntu/mqm
+# sudo chown -R 1001:0 /home/ubuntu/mqm
+
+version: '3.8'
+
+services:
+  ibm-mq:
+    image: 'gupoco/ibmmq-ubuntu-arm64:9.3.4.0'
+    hostname: mqserver
+    container_name: ibm-mq-container
+    ports:
+      - '1414:1414'
+      - '9443:9443'
+      - '9157:9157'
+    environment:
+      - LICENSE=accept
+      - MQ_QMGR_NAME=QM1
+      - MQ_CONSOLE=true
+      - MQ_ENABLE_METRICS=true
+      # - MQ_DEV=true
+      - MQ_ADMIN_USERNAME=admin
+      - MQ_ADMIN_PASSWORD=passw0rd
+
+      # - MQ_APP_USERNAME=app
+      # - MQ_APP_PASSWORD_APP=adminapp
+    volumes:
+      - /home/ubuntu/mqm:/mnt/mqm
+      - /home/ubuntu/mqm/log:/var/mqm/log
+networks:
+  ibm-mq-network:
+    name: ibm-mq-network
+    external: true
