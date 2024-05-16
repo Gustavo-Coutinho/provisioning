@@ -1,0 +1,27 @@
+---
+services:
+  obsidian:
+    image: lscr.io/linuxserver/obsidian:latest
+    container_name: obsidian
+    security_opt:
+      - seccomp:unconfined #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - CUSTOM_PORT=3300
+      - CUSTOM_HTTPS_PORT=3303
+      - CUSTOM_USER=abc
+      - PASSWORD=abc
+      - TITLE=Obsidian
+      - LC_ALL=pt_BR.UTF-8
+      - TZ=America/Sao_Paulo
+      - NO_DECOR=true
+    volumes:
+      - /home/ubuntu/obsidian:/config
+    ports:
+      - 3300:3300
+      - 3303:3303
+    devices:
+      - /dev/dri:/dev/dri #optional
+    shm_size: "1gb"
+    restart: unless-stopped

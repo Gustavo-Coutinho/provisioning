@@ -13,14 +13,14 @@ services:
       - SUBFOLDER=/ #optional
       - TITLE=Webtop #optional
       - CUSTOM_USER=gupoco
-      - PASSWORD=PXgcb3PA87msqvjbAFEGUapxXnboo866HyiF8bXUgXmpELGQ6BtnXXE5peVkhMJ9HRe3D396p2YERU3xiZc3bqrZr4wUoMMSAdX2rJJzdJbX9Gez6CKAmhzFxKDYLexm
+      - PASSWORD=HZqZaZVpo87nFeYbohirr8wQsEDpTYBwu92GkYcpbiGuDa7X7fWxwpQiP22uQErkHTXLQacaj7ee2U8FgpEHvVR9YaC6krDBoDCEm34UVxbhBVwrvceSRKBjCd2PwyU6
     volumes:
       - /home/ubuntu/webtop:/config
-      - /var/run/docker.sock:/var/run/docker.sock #optional
+      #- /var/run/docker.sock:/var/run/docker.sock #optional
     ports:
       - 3000:3000
       - 3001:3001
     devices:
       - /dev/dri:/dev/dri #optional
-    shm_size: "6gb" #optional
+    shm_size: "20gb" #optional
     restart: unless-stopped
