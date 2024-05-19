@@ -18,10 +18,24 @@ services:
       - NO_DECOR=true
     volumes:
       - /home/ubuntu/obsidian:/config
-    ports:
-      - 3300:3300
-      - 3303:3303
     devices:
       - /dev/dri:/dev/dri #optional
     shm_size: "1gb"
     restart: unless-stopped
+    networks:
+      - obsidian-net
+  nginx:
+    image: nginx:latest
+    container_name: reverse-proxy
+    ports:
+      - "443:443" # Expose HTTPS port for SSL
+    volumes:
+      - /home/ubuntu/reverse-proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /home/ubuntu/certs:/etc/nginx/certs:ro
+    depends_on:
+      - obsidian
+    networks:
+      - obsidian-net
+
+networks:
+  obsidian-net:
