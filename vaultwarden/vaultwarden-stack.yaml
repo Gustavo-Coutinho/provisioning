@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest #swap tag to raspberry to run on a raspberry pi
+    container_name: vaultwarden
+    expose:
+      - "80"
+      - "3012"
+    volumes:
+      - ./data/vaultwarden:/data
+    restart: on-failure
+    environment:
+      WEBSOCKET_ENABLED: 'true'
+    networks:
+      - vaultwarden-net
+ 
+  nginx:
+    image: nginx:latest
+    container_name: reverse-proxy
+    ports:
+      - "443:443" # Expose HTTPS port for SSL
+    depends_on:
+      - vaultwarden
+    restart: always
+    volumes:
+      - ./data/nginx:/etc/nginx
+      - ./data/ssl:/etc/ssl
+    networks:
+      - vaultwarden-net
+
+  bw_backup:
+    image: bruceforce/vaultwarden-backup:latest #swap tag to rpi3 to run on a raspberry pi
+    container_name: vaultwarden-backup
+    restart: on-failure
+    depends_on:
+      - vaultwarden
+    volumes:
+      - ./data/vaultwarden:/data
+      - /opt/vaultwarden-backup:/backup
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - DB_FILE=/data/db.sqlite3
+      - BACKUP_FILE=/backup/backup.sqlite3
+      - BACKUP_FILE_PERMISSIONS=700
+      - CRON_TIME=0 1 * * *
+      - TIMESTAMP=false
+      - UID=0
+      - GID=0
+    networks:
+      - vaultwarden-net
