@@ -1,5 +1,5 @@
 # ANTES DO docker compose up, executar:
-# mkdir /home/ubuntu/mqm
+# mkdir -p /home/ubuntu/mqm/data/errors
 # sudo chown -R 1001:0 /home/ubuntu/mqm
 
 version: '3.8'
