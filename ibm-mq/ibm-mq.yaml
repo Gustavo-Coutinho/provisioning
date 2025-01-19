@@ -2,6 +2,8 @@
 #    mkdir /home/ubuntu/mqm
 #    sudo chown -R 1001:0 /home/ubuntu/mqm
 # 2. substituir meudominio.com.br pelo seu dominio dentro dos arquivos do nginx (ibm-mq/etc/nginx/templates/*.conf)
+#     podemos substituir dentro dos ibm-mq/etc/nginx/templates/*.conf com o seguinte comando no linux: 
+#     sed -i 's/meudominio.com.br/mensageria.duckdns.org/g' ibm-mq/etc/nginx/templates/*.conf
 # 3. variáveis de ambiente.env:
 #     olhar o arquivo .env.example
 # 4. aplicar o comando `crontab etc/crontab`
