@@ -1,0 +1,36 @@
+# ESSE DOCKER COMPOSE SERVE APENAS PARA CONSEGUIR O CERTIFICADO SSL
+version: '3.8'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: reverse-proxy
+    environment:
+      - TZ=America/Sao_Paulo
+    ports:
+      - "80:80" # Expor a porta 8080 para HTTP
+      - "443:443" # Expor a porta 9443 para SSL
+    volumes:
+      - /home/ubuntu/mensageria2/etc/nginx/templates/conseguir_cert-nginx.conf:/etc/nginx/nginx.conf:ro
+      - /home/ubuntu/mensageria2/etc/letsencrypt:/etc/letsencrypt
+      - /home/ubuntu/mensageria2/certbot/data:/var/www/certbot # volume compartilhado entre certbot e nginx
+    networks:
+      - ingress-internal
+  # Gerar certificados SSL
+  certbot:
+    container_name: certbot
+    image: certbot/certbot:latest
+    depends_on:
+      - nginx
+    command: >- 
+             certonly --reinstall --webroot --webroot-path=/var/www/certbot
+             --email ${EMAIL} --agree-tos --no-eff-email
+             -d ${DOMAIN}
+    volumes:
+      - /home/ubuntu/mensageria2/etc/letsencrypt:/etc/letsencrypt
+      - /home/ubuntu/mensageria2/certbot/data:/var/www/certbot # volume compartilhado entre certbot e nginx
+    networks:
+      - ingress-internal
+# Rede compartilhada entre backend, frontend e proxy reverso
+networks:
+  ingress-internal:
+    driver: bridge
