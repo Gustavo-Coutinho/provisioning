@@ -1,7 +1,7 @@
 /vaultwarden/gupoco.yaml
 /vaultwarden/data/nginx/nginx.conf
 /ibm-mq/.env
-ibm-mq/etc/letsencrypt/archive/
-ibm-mq/etc/letsencrypt/renewal/
-ibm-mq/etc/letsencrypt/live/
-ibm-mq/etc/letsencrypt/accounts
+/ibm-mq/etc/letsencrypt/archive/
+/ibm-mq/etc/letsencrypt/renewal/
+/ibm-mq/etc/letsencrypt/live/
+/ibm-mq/etc/letsencrypt/accounts
