@@ -44,8 +44,8 @@ services:
     ports:
       - "443:443" # Expor a porta 9443 para SSL
     volumes:
-      - /home/ubuntu/mensageria2/etc/nginx/templates/nginx.conf:/etc/nginx/nginx.conf:ro
-      - /home/ubuntu/mensageria2/etc/letsencrypt:/etc/letsencrypt
+      - /home/ubuntu/ibm-mq/etc/nginx/templates/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /home/ubuntu/ibm-mq/etc/letsencrypt:/etc/letsencrypt
     networks:
       - ingress-internal
 # Rede compartilhada entre backend, frontend e proxy reverso

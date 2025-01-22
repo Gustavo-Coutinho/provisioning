@@ -6,4 +6,4 @@
 # │ │ │ │ │
 # │ │ │ │ │
 # * * * * *  command to execute
-  0 5 * * *  /home/ubuntu/renovar_certificado.sh
+  0 5 * * *  /home/ubuntu/ibm-mq/renovar_certificado_periodicamente.sh
